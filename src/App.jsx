@@ -8,6 +8,7 @@ import Menu from './components/Menu.jsx'
 import AnecdoteList from "./components/AnecdoteList.jsx";
 import About from './components/About.jsx'
 import CreateNew from "./components/CreateNew.jsx";
+import Anecdote from "./components/Anecdote.jsx";
 
 const App = () => {
   const [anecdotes, setAnecdotes] = useState([
@@ -49,14 +50,20 @@ const App = () => {
   }
 
   return (
+      <Router>
     <div>
       <h1>Software anecdotes</h1>
       <Menu />
-      <AnecdoteList anecdotes={anecdotes} />
-      <CreateNew addNew={addNew} />
-      <About />
+      <Routes>
+        <Route path="/about" element={<About/>}/>
+        <Route path="/" element={<AnecdoteList anecdotes={anecdotes}/> }/>
+        <Route path="/anecdotes" element={<AnecdoteList anecdotes={anecdotes}/> }/>
+        <Route path="/create-new" element={<CreateNew addNew={addNew}/>}/>
+        <Route path="/anecdotes/:id" element={<Anecdote anecdotes={anecdotes}/> }/>
+      </Routes>
       <Footer />
     </div>
+      </Router>
   )
 }
 
